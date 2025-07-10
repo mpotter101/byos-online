@@ -2,6 +2,7 @@ extends CharacterBody3D
 class_name Character
 
 class PossibleStates extends Node:
+	static var REFRESH_ME = -1
 	static var IDLE = 0
 	static var MOVING = 1
 	static var HURT = 2 # indicates we should play a hurt animation and flicker the sprite until i-frames wear-off
@@ -12,6 +13,8 @@ class PossibleStates extends Node:
 @export var json_file_path: String
 @export var peer_id = null
 @export var currentState: int = PossibleStates.IDLE
+@export var emote_animation_name: String
+@export var _play_new_emote: bool = false
 
 var json = null
 var _prev_json_file: String = ""
@@ -34,9 +37,8 @@ var canEmote = true
 
 const SPEED = 5.0
 
-var emote_animation_name
-
 var loading_json = false
+
 signal json_loaded
 
 func _can_perform() -> bool:
@@ -91,10 +93,11 @@ func _play_animation_based_on_state():
 		_:
 			pass
 			
-	if _prevAnimationState == currentState:
+	if _prevAnimationState == currentState and not _play_new_emote:
 		return
 		
 	_prevAnimationState = currentState
+	_play_new_emote = false
 			
 	match currentState:
 		PossibleStates.HURT:
@@ -104,6 +107,7 @@ func _play_animation_based_on_state():
 			sprite_animator._Play_Animation_By_Name_From_Start(json.action_map.attack)
 		PossibleStates.EMOTE:
 			sprite_animator._Play_Animation_By_Name_From_Start(emote_animation_name)
+			pass
 		_:
 			pass
 	
@@ -224,7 +228,10 @@ func _Emote(emoteName: String):
 	for emote in json.emotes:
 		if emoteName == emote.name:
 			emote_animation_name = emote.animation
-			
+			break
+
+	_play_new_emote = true
+	_prevAnimationState = PossibleStates.REFRESH_ME
 	_SetState(PossibleStates.EMOTE)
 
 func _Hurt(_damage: int):
@@ -232,9 +239,8 @@ func _Hurt(_damage: int):
 		return
 		
 	canHurt = false
-	_SetState(PossibleStates.HURT)
 	sprite_animator._flicker(2000)
-	
+	_SetState(PossibleStates.HURT)
 
 func _Move():
 	if !canMove or not _can_perform():
@@ -256,3 +262,7 @@ func _Attack():
 
 func _On_Flicker_Completed():
 	canHurt = true
+
+func _Is_Performing_Something():
+	return (currentState != PossibleStates.IDLE 
+	and currentState != PossibleStates.MOVING)

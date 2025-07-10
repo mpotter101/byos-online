@@ -12,6 +12,8 @@ var peer_id: int = Helper._INVALID_PEER_ID
 var scrollbar: VScrollBar
 var max_scroll_length
 
+signal user_started_typing
+signal user_finished_typing
 signal chat_message_queued
 
 # Called when the node enters the scene tree for the first time.
@@ -21,6 +23,9 @@ func _ready() -> void:
 	
 	chat_input.connect("send_message", _handle_message_send)
 	scrollbar.changed.connect(handle_scrollbar_changed)
+	
+	chat_input.user_started_typing.connect(_on_user_started_typing)
+	chat_input.user_finished_typing.connect(_on_user_finished_typing)
 	
 # Auto scrolls to bottom
 func handle_scrollbar_changed(): 
@@ -32,6 +37,12 @@ func _handle_message_send(message: String):
 	chat_input._clear()
 	chat_input._focus()
 	chat_message_queued.emit(message)
+	
+func _on_user_started_typing():
+	user_started_typing.emit()
+	
+func _on_user_finished_typing():
+	user_finished_typing.emit()
 
 @rpc("any_peer", "call_local")
 func _Add_Message(username: String, message: String):

@@ -1,14 +1,41 @@
 ---
 	Major Goal:
-		Restore features that existed in prototype
-			Very close: missing emote buttons, stop moving while typing
-		
-	Next Steps:
 		Combat - Keep Your Trash In Your Own Yard -> Bullet Cave PVP -> Judges
 		
-	Backlog Tasks:
+	Backlog:
+		Major Feature
+		
+	Bugs:
 		Stop horizontal scrolling on chat window
+		
+	Accomplished Major Goals:
+		Restore features that existed in prototype
 ---
+2025 July 9
+	Accomplished Tasks:
+		Created a git repo to help with version management
+		Player no longer moves while typing and this works in multiplayer + singleplayer
+		Setup better UI for emote buttons
+		Created a clever way to load profile data into GUI without complicating app more
+		Emote buttons are now networked and you can spam emotes B)
+		
+	Today's Goal:
+		[v] Stop moving while typing
+
+	Let's see... adding emote buttons back... okay yeah. Little bit of anxiety with getting this to
+	work, but let's see... I can probably take the json loaded from the profile and pass it to
+	the emote buttons area and then have the main app communicate between those buttons and the
+	local_player's character... or the local_player and have the player communicate to its character
+	............. seems like an okay starting point.
+	
+	---
+	
+	Alright. Emote buttons exist again and look way better than in the prototype.
+	Clicking them emits an event that get's bubble up to the app. Just need to connect it
+	to the player
+	
+	Emote buttons now work locally... need to figure out how to network that an emote/action has
+	started... I don't think I can do this without RPC'ing though...
 
 2025 July 8
 	Accomplished Tasks:
@@ -17,7 +44,6 @@
 		Selecting a character changes which sprite to load in
 		character preview shows the spritesheet you have selected
 		Selected character is networked across clients
-		
 		
 	Current goal:
 		Restore the state control so the character animates based on its state

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0btguqauujyi"]
+[gd_scene load_steps=5 format=3 uid="uid://c0btguqauujyi"]
 
 [ext_resource type="Script" uid="uid://lke02lf7yo0j" path="res://Scripts/networked_character.gd" id="1_85f76"]
 [ext_resource type="PackedScene" uid="uid://cdskpjoqw15xm" path="res://Scenes/Local_sprite.tscn" id="3_lojsy"]
@@ -19,12 +19,16 @@ properties/3/replication_mode = 1
 properties/4/path = NodePath(".:currentState")
 properties/4/spawn = true
 properties/4/replication_mode = 1
+properties/5/path = NodePath(".:emote_animation_name")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:_play_new_emote")
+properties/6/spawn = true
+properties/6/replication_mode = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_42t4s"]
 radius = 0.288017
 height = 1.65679
-
-[sub_resource type="BoxMesh" id="BoxMesh_85f76"]
 
 [node name="Networked Character" type="CharacterBody3D" node_paths=PackedStringArray("sprite_animator")]
 collision_mask = 6
@@ -38,10 +42,4 @@ replication_config = SubResource("SceneReplicationConfig_faab6")
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.7, 0)
 shape = SubResource("CapsuleShape3D_42t4s")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.0957837, 0, 0, 0, 0.104827, 0, 0, 0, 1, 0, 1, 1)
-mesh = SubResource("BoxMesh_85f76")
-
 [node name="Local Sprite" parent="." instance=ExtResource("3_lojsy")]
-
-[node name="Sprite Loader" type="Node3D" parent="."]

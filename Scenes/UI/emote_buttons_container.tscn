@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpn0rwgr0cqv8"]
+
+[ext_resource type="Script" uid="uid://vp1fmqlok65e" path="res://Scripts/emote_buttons_container.gd" id="1_fpswn"]
+[ext_resource type="PackedScene" uid="uid://3vpgxfubq36l" path="res://Scenes/UI/emote_button.tscn" id="2_2dpuw"]
+
+[node name="Emote Buttons Container" type="Control" node_paths=PackedStringArray("emote_button_box_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fpswn")
+emote_button_prefab = ExtResource("2_2dpuw")
+emote_button_box_container = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer/Emote Button Box Container")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Emote Buttons Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Emote Buttons"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Emote Button Box Container" type="HFlowContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer"]
+clip_contents = true
+layout_mode = 2

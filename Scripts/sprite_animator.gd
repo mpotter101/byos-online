@@ -30,7 +30,7 @@ signal animation_completed
 signal flicker_completed
 
 func _can_perform() -> bool:
-	return is_multiplayer_authority() or is_local
+	return is_local or is_multiplayer_authority()
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(peer_id)

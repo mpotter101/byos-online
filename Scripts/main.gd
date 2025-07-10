@@ -30,6 +30,8 @@ func _ready() -> void:
 	join_lobby_menu.hide()
 	# connect to events from child objects
 	chat.chat_message_queued.connect(_handle_chat_message_queued)
+	chat.user_started_typing.connect(_on_user_started_typing)
+	chat.user_finished_typing.connect(_on_user_finished_typing)
 	
 	main_menu.play_offline_pressed.connect(_start_singleplayer)
 	main_menu.host_lobby_pressed.connect(_start_host_lobby)
@@ -43,8 +45,13 @@ func _ready() -> void:
 	join_lobby_menu.join_lobby.connect(_on_join_lobby_pressed)
 	join_lobby_menu.cancel_join_lobby.connect(_cancel_join_lobby)
 	
+	gui.emote_button_pressed.connect(_on_emote_button_pressed)
+	
 func _process(_delta: float) -> void:
 	_handle_actions()
+	
+func _on_emote_button_pressed(emote_name: String):
+	local_player._play_emote(emote_name)
 	
 func _handle_actions():
 	if Input.is_action_just_pressed("ui_cancel") and game_stage == GAME_STAGE.PLAYING:
@@ -54,12 +61,19 @@ func _handle_actions():
 func _handle_chat_message_queued(message):
 	chat._Add_Message.rpc(profile.username, message)
 
+func _on_user_started_typing():
+	local_player._pause_input()
+
+func _on_user_finished_typing():
+	local_player._resume_input()
+
 func _enter_playing_game_stage():
 	main_menu.hide()
 	options_menu.hide()
 	join_lobby_menu.hide()
 	blocker_pop_up.hide()
 	gui.show()
+	gui._load_profile(profile)
 	game_stage = GAME_STAGE.PLAYING
 	
 	# tie our player to their instanced character

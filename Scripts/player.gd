@@ -19,6 +19,8 @@ var camDistancesMetersSize: int = 4
 var currentDistanceIndex = 1
 var isCamCloseEnoughToTargetDistance = false
 
+var can_input: bool = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -27,9 +29,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_handle_camera_zoom(delta)
 	
-	if my_character:
+	if my_character and can_input:
 		_handle_character_move(delta)
 		_handle_character_state()
+	
+func _pause_input():
+	can_input = false
+	
+func _resume_input():
+	can_input = true
 	
 func _assign_character(character: Character):
 	my_character = character
@@ -39,11 +47,13 @@ func _input(event):
 		_handle_camera_input(event)
 
 func _handle_camera_input(event):
-		if Input.is_action_pressed("secondary_click"):
-			var delta = get_process_delta_time()
-			camPivotY.rotate_y(-event.relative.x * mouseSensitivity * delta)
-			camPivotX.rotate_x(-event.relative.y * mouseSensitivity * delta)
-			camPivotX.rotation.x = clamp(camPivotX.rotation.x, deg_to_rad(-35), deg_to_rad(35))
+	if not can_input: return
+	
+	if Input.is_action_pressed("secondary_click"):
+		var delta = get_process_delta_time()
+		camPivotY.rotate_y(-event.relative.x * mouseSensitivity * delta)
+		camPivotX.rotate_x(-event.relative.y * mouseSensitivity * delta)
+		camPivotX.rotation.x = clamp(camPivotX.rotation.x, deg_to_rad(-35), deg_to_rad(35))
 
 func _handle_camera_zoom(delta: float):
 	if Input.is_action_just_pressed("zoom_out"):
@@ -81,6 +91,8 @@ func _any_movement_held():
 func _handle_character_state():
 	if _any_movement_held():
 		my_character._Move()
-	elif not _any_movement_held():
+	elif not _any_movement_held() and not my_character._Is_Performing_Something():
 		my_character._Idle()
 	
+func _play_emote(emote_name: String):
+	my_character._Emote(emote_name)

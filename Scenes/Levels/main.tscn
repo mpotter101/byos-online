@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://djmqx855r0h80"]
+[gd_scene load_steps=13 format=3 uid="uid://djmqx855r0h80"]
 
 [ext_resource type="Script" uid="uid://bxtj2rrtp4anb" path="res://Scripts/main.gd" id="1_nk5xi"]
 [ext_resource type="PackedScene" uid="uid://d1iojmqn5dk3u" path="res://Scenes/UI/profile.tscn" id="2_7i1ub"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bdqjptm6ako5d" path="res://Scenes/UI/chat.tscn" id="3_7i1ub"]
 [ext_resource type="Script" uid="uid://c1ytnn5ou57lh" path="res://Scripts/gui.gd" id="6_d8okw"]
 [ext_resource type="PackedScene" uid="uid://3slmoxxwqihc" path="res://Scenes/UI/join_lobby_ui.tscn" id="6_tpkgp"]
+[ext_resource type="PackedScene" uid="uid://bpn0rwgr0cqv8" path="res://Scenes/UI/emote_buttons_container.tscn" id="8_0iqpd"]
 [ext_resource type="Script" uid="uid://bifjk7kttlmpr" path="res://Scripts/player.gd" id="8_5sf7f"]
 [ext_resource type="Script" uid="uid://d1m57aqor3ghu" path="res://Scripts/world.gd" id="8_irfg1"]
 [ext_resource type="PackedScene" uid="uid://c0btguqauujyi" path="res://Scenes/networked_character.tscn" id="10_0iqpd"]
@@ -104,7 +105,7 @@ horizontal_alignment = 1
 visible = false
 layout_mode = 2
 
-[node name="GUI" type="Control" parent="."]
+[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("emote_button_container")]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -113,6 +114,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_d8okw")
+emote_button_container = NodePath("GUI HContainer/Column 3/Row 3/Emote Buttons Container")
 
 [node name="GUI HContainer" type="HBoxContainer" parent="GUI"]
 layout_mode = 1
@@ -180,22 +182,8 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="GUI/GUI HContainer/Column 3/Row 3"]
+[node name="Emote Buttons Container" parent="GUI/GUI HContainer/Column 3/Row 3" instance=ExtResource("8_0iqpd")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Emote Buttons Label" type="Label" parent="GUI/GUI HContainer/Column 3/Row 3/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Emote Buttons"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://c0btguqauujyi")
@@ -220,7 +208,7 @@ camPivotX = NodePath("Cam Vertical Offset/Cam Pivot Y/Cam Pivot X")
 camSpringArm = NodePath("Cam Vertical Offset/Cam Pivot Y/Cam Pivot X/SpringArm3D")
 
 [node name="Cam Vertical Offset" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.96629, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29997, 0)
 
 [node name="Cam Pivot Y" type="Node3D" parent="Player/Cam Vertical Offset"]
 

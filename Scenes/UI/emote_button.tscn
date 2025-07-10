@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://3vpgxfubq36l"]
+
+[ext_resource type="Script" uid="uid://dc16y62e1hlre" path="res://Scripts/emote_button.gd" id="1_iv1aq"]
+[ext_resource type="Texture2D" uid="uid://83pp6aqc63nt" path="res://Characters/noelle-a-test.png" id="2_r7h03"]
+
+[node name="Emote Button" type="PanelContainer" node_paths=PackedStringArray("my_button", "my_sprite2d", "my_label")]
+offset_right = 100.0
+offset_bottom = 100.0
+mouse_filter = 2
+script = ExtResource("1_iv1aq")
+my_button = NodePath("Button")
+my_sprite2d = NodePath("MarginContainer/Control/Sprite2D")
+my_label = NodePath("MarginContainer/Label")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="CenterContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/Control"]
+texture = ExtResource("2_r7h03")
+hframes = 15
+vframes = 8
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Jump"

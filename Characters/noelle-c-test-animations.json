@@ -5,7 +5,7 @@
 		"If your sprite is a higher resolution, it will appear bigger. Use pixelSizeInMeters to make them appear smaller or whatever size you want."
 	],
 	
-	"name": "Noelle",
+	"name": "Blowelle",
 	"spritesheet": "res://Characters/noelle-c-test.png",
 	
 	"combat": {
