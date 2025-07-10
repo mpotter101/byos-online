@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0btguqauujyi"]
+
+[ext_resource type="Script" uid="uid://lke02lf7yo0j" path="res://Scripts/networked_character.gd" id="1_85f76"]
+[ext_resource type="PackedScene" uid="uid://cdskpjoqw15xm" path="res://Scenes/Local_sprite.tscn" id="3_lojsy"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_faab6"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:peer_id")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:json_file_path")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:currentState")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_42t4s"]
+radius = 0.288017
+height = 1.65679
+
+[sub_resource type="BoxMesh" id="BoxMesh_85f76"]
+
+[node name="Networked Character" type="CharacterBody3D" node_paths=PackedStringArray("sprite_animator")]
+collision_mask = 6
+script = ExtResource("1_85f76")
+sprite_animator = NodePath("Local Sprite")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_faab6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.7, 0)
+shape = SubResource("CapsuleShape3D_42t4s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0957837, 0, 0, 0, 0.104827, 0, 0, 0, 1, 0, 1, 1)
+mesh = SubResource("BoxMesh_85f76")
+
+[node name="Local Sprite" parent="." instance=ExtResource("3_lojsy")]
+
+[node name="Sprite Loader" type="Node3D" parent="."]

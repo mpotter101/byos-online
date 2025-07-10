@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqre25urw8xct"]
+
+[ext_resource type="Script" uid="uid://cqq6uwxu6bapq" path="res://Scripts/chat_message.gd" id="1_363lx"]
+
+[node name="Chat Message" type="MarginContainer" node_paths=PackedStringArray("message_name", "message_area")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_363lx")
+message_name = NodePath("MarginContainer/Chat Message HBox/Sender Name")
+message_area = NodePath("MarginContainer/Chat Message HBox/Chat Message")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Chat Message HBox" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Sender Name" type="Label" parent="MarginContainer/Chat Message HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.2
+text = "Your name here"
+
+[node name="Text Spacer" type="Control" parent="MarginContainer/Chat Message HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="Chat Message" type="Label" parent="MarginContainer/Chat Message HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Your message Here"

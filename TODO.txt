@@ -1,0 +1,111 @@
+---
+	Major Goal:
+		Restore features that existed in prototype
+			Very close: missing emote buttons, stop moving while typing
+		
+	Next Steps:
+		Combat - Keep Your Trash In Your Own Yard -> Bullet Cave PVP -> Judges
+		
+	Backlog Tasks:
+		Stop horizontal scrolling on chat window
+---
+
+2025 July 8
+	Accomplished Tasks:
+		Added some debug spritesheets for testing character select
+		The profile object now finds sprites in the characters folder
+		Selecting a character changes which sprite to load in
+		character preview shows the spritesheet you have selected
+		Selected character is networked across clients
+		
+		
+	Current goal:
+		Restore the state control so the character animates based on its state
+		like in the prototype
+		
+	--- GOAL ACCOMPLISHED!!! The "Rotation" of the sprite is now being applied
+		correctly to the idle and walk. Have yet to test the other states, but
+		this is enough for me to move forward
+		
+		... new problem
+		
+	Update how sprites are rendered so we are tracking which state we are in
+	and then letting the local sprite figure out what that means...
+	
+	BUT WE SOLVED IT!
+		Sprites are loading loading okay between host and client as well as client and client
+		
+	Still need to add emotes, but hopefully that is only state related problem
+		
+2025 July 7
+	Accomplished Tasks:
+		Users can move around again...
+		Learned a lot about how the networking works
+		Restructured the character object back into existence
+		Character object now networks sprite correctly
+		Camera movement and whatnot restored
+		
+	Spent a lot of today figuring out why things broke when I nested the networked sprite
+	Turns out I need to be careful about assigning data to things I instantiate since the
+	multiplayer spawner won't replicate objects with the data I've assigned after its
+	instantiation
+
+2025 July 6
+	Accomplished Tasks:
+		Chatting is now working again!
+		Text input has all the fancy features one would expect from a modern chat program
+		Chat is now scrollable and it feels good
+		
+	Notes:
+		The chat input emits a "user is typing" event. I intend to use this to denote to other
+		players when a user is typing by adding some kind of emote of their avatar
+		and, optionally, playing an animation if the character has one setup for that action
+
+	Possible next steps:
+		Get player moving around again
+		Add susie sprite sheet
+		Make the character selector work by scanning the characters folder
+		Make disconnect button work
+
+2025 July 5
+	Accomplished Tasks:
+		> Re-open menu options during play by pressing esc
+		> Fixed errors with sprite frames being out-of-bounds when instantiated
+		> Can start singleplayer without issue
+		> Work on setting up GUI for game play
+		> Game stage management
+		> A little progress on re-creating the chat functionality
+
+2025 July 4
+	Objects have been REALLY organized after borking my initial prototype.
+	Still need to spend some time figuring out how to best organize the player
+	Spent a lot of time making a nice UI
+	
+	Top priority is getting this project back to the "Noelle Chatroom" prototype.
+	
+	And here is a list of things that I can do so I don't forget
+	TODO:
+		Re-open options menu by pressing ESC after having joined a game/singleplayer
+		
+		work on making singleplayer work
+		
+		Disconnect from server and return to main menu
+		Have the player get assigned which character belongs to it
+			player will now be an already created local object that manipulates a created net object
+			Spend some time working on this
+			
+		Camera exists as its own node structure separate from the player, but still listens for inputs
+
+		Still need to make a susie sprite sheet
+		
+		Selecting between Susie or Noelle
+		
+		Create a Player Character node that extends Character3D
+			Has a Display name label that floats above it
+
+		Have character preview/select start with the first valid element
+			- also populate this dynamically based on characters in the Characters/ folder.
+			
+		If you don't enter a name, your name is "Nameless" when joining/playing
+
+		Persist settings with config eventually

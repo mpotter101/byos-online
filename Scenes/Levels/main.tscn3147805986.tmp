@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://djmqx855r0h80"]
+
+[ext_resource type="Script" uid="uid://bxtj2rrtp4anb" path="res://Scripts/main.gd" id="1_nk5xi"]
+[ext_resource type="Script" uid="uid://ct1mhvbeo7eo0" path="res://Scripts/profile.gd" id="1_s0gyx"]
+[ext_resource type="PackedScene" uid="uid://bwotcgj7cw12" path="res://Scenes/networker.tscn" id="2_u872a"]
+[ext_resource type="PackedScene" uid="uid://4w8m5kcxb5of" path="res://Scenes/networked_sprite.tscn" id="4_nk5xi"]
+
+[node name="Main" type="Node3D" node_paths=PackedStringArray("profile", "networker")]
+script = ExtResource("1_nk5xi")
+profile = NodePath("Profile")
+networker = NodePath("Networker")
+
+[node name="Profile" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_s0gyx")
+
+[node name="Networker" parent="." node_paths=PackedStringArray("world") instance=ExtResource("2_u872a")]
+playerPrefab = ExtResource("4_nk5xi")
+world = NodePath("../World")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://4w8m5kcxb5of")
+spawn_path = NodePath("../World")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.976296, 0.21644, 0, -0.21644, 0.976296, 0, 1.29464, 2.81021)

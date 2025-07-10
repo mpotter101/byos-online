@@ -1,0 +1,92 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdqjptm6ako5d"]
+
+[ext_resource type="Script" uid="uid://crynix3so65uc" path="res://Scripts/chat.gd" id="1_fstny"]
+[ext_resource type="PackedScene" uid="uid://cqre25urw8xct" path="res://Scenes/UI/chat_message.tscn" id="2_367ml"]
+[ext_resource type="Script" uid="uid://ccwmcsvkqun4k" path="res://Scripts/chat_input.gd" id="3_oow3h"]
+
+[node name="Chat" type="Control" node_paths=PackedStringArray("chat_history_scroll_container", "chat_history", "chat_input")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_fstny")
+chat_history_scroll_container = NodePath("MarginContainer/Panel/VBoxContainer/Panel/Chat History Margin Container/Chat History Scroll")
+chat_history = NodePath("MarginContainer/Panel/VBoxContainer/Panel/Chat History Margin Container/Chat History Scroll/Chat History")
+chat_message_prefab = ExtResource("2_367ml")
+chat_input = NodePath("MarginContainer/Panel/VBoxContainer/Chat Input")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Chat History Margin Container" type="MarginContainer" parent="MarginContainer/Panel/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Chat History Scroll" type="ScrollContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/Chat History Margin Container"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Chat History" type="VBoxContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/Chat History Margin Container/Chat History Scroll"]
+layout_mode = 2
+
+[node name="Chat Input" type="MarginContainer" parent="MarginContainer/Panel/VBoxContainer" node_paths=PackedStringArray("input_line_edit", "send_message_button")]
+layout_mode = 2
+script = ExtResource("3_oow3h")
+input_line_edit = NodePath("Send Message HContainer/Chat Input Text Edit")
+send_message_button = NodePath("Send Message HContainer/Send Message Button")
+
+[node name="Send Message HContainer" type="HBoxContainer" parent="MarginContainer/Panel/VBoxContainer/Chat Input"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Chat Input Text Edit" type="LineEdit" parent="MarginContainer/Panel/VBoxContainer/Chat Input/Send Message HContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Send Message Button" type="Button" parent="MarginContainer/Panel/VBoxContainer/Chat Input/Send Message HContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+text = "Send"

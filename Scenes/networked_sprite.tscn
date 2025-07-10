@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://4w8m5kcxb5of"]
+
+[ext_resource type="Texture2D" uid="uid://bxfqjfd7opjpc" path="res://Characters/noelle-test.png" id="1_5144l"]
+[ext_resource type="Script" uid="uid://b1amuagj64ls4" path="res://Scripts/sprite_animator.gd" id="1_u74is"]
+[ext_resource type="Texture2D" uid="uid://ce7oni53i8ano" path="res://Art/Sprites/shadow.png" id="2_hb871"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yjsus"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Sprite3D:frame")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:visible")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:json_file_path")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Sprite3D:pixel_size")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+
+[node name="Networked_Sprite" type="Node3D" node_paths=PackedStringArray("my_sprite")]
+script = ExtResource("1_u74is")
+my_sprite = NodePath("Sprite3D")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_yjsus")
+
+[node name="Shadow" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0162349, 0)
+texture = ExtResource("2_hb871")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+texture_filter = 2
+texture = ExtResource("1_5144l")
+hframes = 15
+vframes = 8
+frame = 1

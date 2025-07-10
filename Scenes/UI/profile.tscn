@@ -1,0 +1,124 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1iojmqn5dk3u"]
+
+[ext_resource type="Script" uid="uid://ct1mhvbeo7eo0" path="res://Scripts/profile.gd" id="1_h56j3"]
+[ext_resource type="Texture2D" uid="uid://bxfqjfd7opjpc" path="res://Characters/noelle-test.png" id="2_gpyrb"]
+[ext_resource type="Script" uid="uid://2rf62q4mq61" path="res://Scripts/character_selector.gd" id="2_n6pvd"]
+
+[node name="Profile" type="Control" node_paths=PackedStringArray("usernameTextEdit", "characterSelector")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h56j3")
+usernameTextEdit = NodePath("Profile Ui/VBoxContainer/MarginContainer/VBoxContainer/Name Container/NameTextEdit")
+characterSelector = NodePath("Profile Ui/VBoxContainer/MarginContainer/VBoxContainer/Character Select VContainer/Character Select HContainer/Character Select")
+metadata/_tab_index = 0
+
+[node name="Profile Ui" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Profile Ui"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Profile Ui/VBoxContainer"]
+layout_mode = 2
+text = "Profile Settings"
+
+[node name="MarginContainer" type="MarginContainer" parent="Profile Ui/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Profile Ui/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Name Container" type="HBoxContainer" parent="Profile Ui/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.1
+
+[node name="Label" type="Label" parent="Profile Ui/VBoxContainer/MarginContainer/VBoxContainer/Name Container"]
+layout_mode = 2
+text = "What is your name?"
+
+[node name="NameTextEdit" type="TextEdit" parent="Profile Ui/VBoxContainer/MarginContainer/VBoxContainer/Name Container"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+placeholder_text = "Type Here..."
+
+[node name="Character Select VContainer" type="VBoxContainer" parent="Profile Ui/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Character Select HContainer" type="HBoxContainer" parent="Profile Ui/VBoxContainer/MarginContainer/VBoxContainer/Character Select VContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Label" type="Label" parent="Profile Ui/VBoxContainer/MarginContainer/VBoxContainer/Character Select VContainer/Character Select HContainer"]
+layout_mode = 2
+text = "Selected Character:"
+
+[node name="Character Select" type="OptionButton" parent="Profile Ui/VBoxContainer/MarginContainer/VBoxContainer/Character Select VContainer/Character Select HContainer" node_paths=PackedStringArray("characterPreview")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+item_count = 2
+popup/item_0/text = "Noelle"
+popup/item_0/id = 0
+popup/item_1/text = "Susie"
+popup/item_1/id = 1
+script = ExtResource("2_n6pvd")
+characterPreview = NodePath("../../MarginContainer/Panel/Sprite Container/TextureRect")
+
+[node name="MarginContainer" type="MarginContainer" parent="Profile Ui/VBoxContainer/MarginContainer/VBoxContainer/Character Select VContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="Profile Ui/VBoxContainer/MarginContainer/VBoxContainer/Character Select VContainer/MarginContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="Sprite Container" type="VBoxContainer" parent="Profile Ui/VBoxContainer/MarginContainer/VBoxContainer/Character Select VContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -495.0
+offset_right = 495.0
+offset_bottom = 528.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Profile Ui/VBoxContainer/MarginContainer/VBoxContainer/Character Select VContainer/MarginContainer/Panel/Sprite Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Character Preview"
+
+[node name="TextureRect" type="TextureRect" parent="Profile Ui/VBoxContainer/MarginContainer/VBoxContainer/Character Select VContainer/MarginContainer/Panel/Sprite Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture = ExtResource("2_gpyrb")
+stretch_mode = 2

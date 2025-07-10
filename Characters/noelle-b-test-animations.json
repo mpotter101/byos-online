@@ -1,0 +1,238 @@
+{
+	"_Comments": [
+		"Sprite sheets need to have equi-distant sprites. E.g. Every sprite is 64x64 pixels",
+		"X and Y on frames are cell numbers.",
+		"If your sprite is a higher resolution, it will appear bigger. Use pixelSizeInMeters to make them appear smaller or whatever size you want."
+	],
+	
+	"name": "Noelle",
+	"spritesheet": "res://Characters/noelle-b-test.png",
+	
+	"combat": {
+		"health": 35,
+		"defense": 6,
+		"attack": {
+			"damage": [9, 15],
+			"ap_gain": {
+				"miss": 3,
+				"good": 15,
+				"perfect": 25
+			}
+		},
+		"acts": [
+			{
+				"act": "Dance",
+				"animation": "get_scared"
+			},
+			{
+				"act": "Insult",
+				"animation": "angry"
+			}
+		],
+		"magic": [
+			{
+				"name": "Ice Magic",
+				"animation": "cast_magic",
+				"projectile": "snowflake",
+				"ap_cost": 20,
+				"effects": {
+					"freeze": {
+						"build": "50",
+						"damage": [20, 30]
+					}
+				}
+			}
+		],
+		"items": {
+			"animation": "middle_finger",
+			"available": [
+				"Hot Chocolate",
+				"Gingerbread Cookie"
+			],
+		},
+		"defend": {
+			"can_defend": true,
+			"animation": "angry"
+		},
+		"spare": {
+			"can_spare": true,
+			"animation": "cast_magic"
+		}
+	},
+	
+	"pixelSizeInMeters": 0.03,
+	"horizontal_frames": 15,
+	"vertical_frames": 8,
+	"sprite_y_offset": 1,
+	"shadow_scale": 0.25,
+	"animations": [
+		{
+			"name": "idle_backward",
+			"frames": [{ "x": 1, "y": 0, "durationMs": 100 }]
+		},
+		{
+			"name": "idle_forward",
+			"frames": [{ "x": 1, "y": 1, "durationMs": 200 }]
+		},
+		{
+			"name": "idle_left",
+			"frames": [{ "x": 0, "y": 2, "durationMs": 100 }]
+		},
+		{
+			"name": "idle_right",
+			"frames": [{ "x": 0, "y": 3, "durationMs": 100 }]
+		},
+		{
+			"name": "walk_backward",
+			"frames": [
+				{ "x": 0, "y": 0, "durationMs": 200 },
+				{ "x": 1, "y": 0, "durationMs": 200 },
+				{ "x": 2, "y": 0, "durationMs": 200 },
+				{ "x": 3, "y": 0, "durationMs": 200 }
+			]
+		},
+		{
+			"name": "walk_forward",
+			"frames": [
+				{ "x": 0, "y": 1, "durationMs": 200 },
+				{ "x": 1, "y": 1, "durationMs": 200 },
+				{ "x": 2, "y": 1, "durationMs": 200 },
+				{ "x": 3, "y": 1, "durationMs": 200 }
+			]
+		},
+		{
+			"name": "walk_left",
+			"frames": [
+				{ "x": 0, "y": 2, "durationMs": 200 },
+				{ "x": 1, "y": 2, "durationMs": 200 },
+				{ "x": 2, "y": 2, "durationMs": 200 },
+				{ "x": 3, "y": 2, "durationMs": 200 }
+			]
+		},
+		{
+			"name": "walk_right",
+			"frames": [
+				{ "x": 0, "y": 3, "durationMs": 200 },
+				{ "x": 1, "y": 3, "durationMs": 200 },
+				{ "x": 2, "y": 3, "durationMs": 200 },
+				{ "x": 3, "y": 3, "durationMs": 200 }
+			]
+		},
+		{
+			"name": "cast_magic",
+			"frames": [
+				{ "x": 4, "y": 0, "durationMs": 100 },
+				{ "x": 5, "y": 0, "durationMs": 100 },
+				{ "x": 6, "y": 0, "durationMs": 100 },
+				{ "x": 7, "y": 0, "durationMs": 100 },
+				{ "x": 8, "y": 0, "durationMs": 100 },
+				{ "x": 9, "y": 0, "durationMs": 100 },
+				{ "x": 10, "y": 0, "durationMs": 100 }
+			]
+		},
+		{
+			"name": "arm_flail",
+			"frames": [
+				{ "x": 4, "y": 1, "durationMs": 100 },
+				{ "x": 5, "y": 1, "durationMs": 100 },
+				{ "x": 6, "y": 1, "durationMs": 100 },
+				{ "x": 7, "y": 1, "durationMs": 100 },
+				{ "x": 8, "y": 1, "durationMs": 100 }
+			]
+		},
+		{
+			"name": "hurt",
+			"frames": [
+				{ "x": 4, "y": 2, "durationMs": 400 },
+				{ "x": 5, "y": 2, "durationMs": 200 }
+			]
+		},
+		{
+			"name": "down",
+			"frames": [
+				{ "x": 4, "y": 3, "durationMs": 100 },
+				{ "x": 5, "y": 3, "durationMs": 100 }
+			]
+		},
+		{
+			"name": "get_scared",
+			"frames": [
+				{ "x": 0, "y": 4, "durationMs": 100 },
+				{ "x": 1, "y": 4, "durationMs": 100 },
+				{ "x": 2, "y": 4, "durationMs": 100 },
+				{ "x": 3, "y": 4, "durationMs": 100 },
+				{ "x": 4, "y": 4, "durationMs": 100 },
+				{ "x": 5, "y": 4, "durationMs": 100 },
+				{ "x": 6, "y": 4, "durationMs": 100 },
+				{ "x": 7, "y": 4, "durationMs": 100 },
+				{ "x": 8, "y": 4, "durationMs": 100 },
+				{ "x": 9, "y": 4, "durationMs": 100 },
+				{ "x": 10, "y": 4, "durationMs": 100 },
+				{ "x": 11, "y": 4, "durationMs": 100 },
+				{ "x": 12, "y": 4, "durationMs": 100 },
+				{ "x": 13, "y": 4, "durationMs": 100 },
+				{ "x": 14, "y": 4, "durationMs": 100 }
+			]
+		},
+		{
+			"name": "sit_down",
+			"frames": [
+				{ "x": 0, "y": 5, "durationMs": 1000 },
+				{ "x": 1, "y": 5, "durationMs": 1000 }
+			]
+		},
+		{
+			"name": "middle_finger",
+			"frames": [
+				{ "x": 0, "y": 6, "durationMs": 100 },
+				{ "x": 1, "y": 6, "durationMs": 100 }
+			]
+		},
+		{
+			"name": "angry",
+			"frames": [
+				{ "x": 0, "y": 7, "durationMs": 100 }
+			]
+		}
+	],
+	
+	"action_map": {
+		"idle_facing_away": "idle_forward",
+		"idle_facing_toward": "idle_backward",
+		"idle_left": "idle_left",
+		"idle_right": "idle_right",
+		"move_facing_away": "walk_forward",
+		"move_facing_toward": "walk_backward",
+		"move_left": "walk_left",
+		"move_right": "walk_right",
+		"hurt": "hurt",
+		"attack": "cast_magic"
+	},
+	
+	"emotes": [
+		{
+			"name": "Get Scared",
+			"animation": "get_scared",
+			"looping": false,
+			"thumbnail": { "x": 4, "y": 4 }
+		},
+		{
+			"name": "Sit Down",
+			"animation": "sit_down",
+			"looping": true,
+			"thumbnail": { "x": 0, "y": 5 }
+		},
+		{
+			"name" : "Middle Finger",
+			"animation": "middle_finger",
+			"looping": false,
+			"thumbnail": { "x": 1, "y": 6 }
+		},
+		{
+			"name": "Angry",
+			"animation": "angry",
+			"looping": false,
+			"thumbnail": { "x": 0, "y": 7 }
+		}
+	]
+}
